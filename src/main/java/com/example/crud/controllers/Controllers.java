@@ -19,14 +19,19 @@ public class Controllers {
 
     private Map<String, String> response;
 
-    @GetMapping("/getdata")
-        public Map<String, String> get()
-    {
-        response = new HashMap<>();
-        response.put("msg", "Data Listed successfully");
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(repo.findAll());
-        response.put("data", jsonString);
+    @GetMapping("/getdata/{no}")
+        public Map<String, String> get(@PathVariable String no) {
+        int id = Integer.parseInt(no);
+
+        for (int i = 0; i < id; i++) {
+            response = new HashMap<>();
+            response.put("msg", "Data Listed successfully");
+            Gson gson = new Gson();
+            String jsonString = gson.toJson(repo.findAll());
+            response.put("data", jsonString);
+            System.out.println(i);
+            System.out.println(response);
+        }
 
         return response;
     }
